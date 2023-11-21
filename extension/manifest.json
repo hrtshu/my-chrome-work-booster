@@ -5,6 +5,11 @@
   "description": "",
   "content_scripts": [
     {
+      "js": ["common/util.js", "scripts/slack/openLinkInBrowser.js"],
+      "matches": ["https://moneyforward.slack.com/archives/*"],
+      "run_at": "document_start"
+    },
+    {
       "js": ["scripts/asana/openTaskInFullScrenn.js"],
       "matches": ["https://app.asana.com/0/*/*"],
       "run_at": "document_start"
