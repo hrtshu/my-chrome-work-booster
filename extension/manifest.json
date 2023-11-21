@@ -3,6 +3,9 @@
   "name": "My Work Booster",
   "version": "0.1",
   "description": "",
+  "background": {
+    "service_worker": "background.js"
+  },
   "content_scripts": [
     {
       "js": ["common/util.js", "scripts/slack/hideChannelList.js"],
@@ -44,5 +47,6 @@
       "matches": ["https://*.kibe.la/signin?*"],
       "run_at": "document_start"
     }
-  ]
+  ],
+  "permissions": ["tabs"]
 }
