@@ -3,5 +3,11 @@
   "name": "My Work Booster",
   "version": "0.1",
   "description": "",
-  "content_scripts": []
+  "content_scripts": [
+    {
+      "js": ["scripts/asana/openTaskInFullScrenn.js"],
+      "matches": ["https://app.asana.com/0/*/*"],
+      "run_at": "document_start"
+    }
+  ]
 }
