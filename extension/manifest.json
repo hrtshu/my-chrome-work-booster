@@ -33,6 +33,11 @@
       "js": ["common/util.js", "scripts/kibela/expandWidth.js"],
       "matches": ["https://*.kibe.la/notes/*"],
       "run_at": "document_start"
+    },
+    {
+      "js": ["common/util.js", "scripts/kibela/clickLoginButton.js"],
+      "matches": ["https://*.kibe.la/signin?*"],
+      "run_at": "document_start"
     }
   ]
 }
