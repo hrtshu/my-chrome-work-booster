@@ -13,7 +13,7 @@
       "run_at": "document_start"
     },
     {
-      "js": ["common/util.js", "scripts/slack/hideUnreadDot.js"],
+      "js": ["scripts/slack/hideUnreadDot.js"],
       "matches": ["https://app.slack.com/client/*"],
       "run_at": "document_idle"
     },
