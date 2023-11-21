@@ -8,6 +8,11 @@
       "js": ["scripts/asana/openTaskInFullScrenn.js"],
       "matches": ["https://app.asana.com/0/*/*"],
       "run_at": "document_start"
+    },
+    {
+      "js": ["common/util.js", "scripts/asana/hideHeader.js"],
+      "matches": ["https://app.asana.com/0/*"],
+      "run_at": "document_idle"
     }
   ]
 }
