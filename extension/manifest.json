@@ -23,6 +23,11 @@
       "run_at": "document_start"
     },
     {
+      "js": ["common/util.js", "scripts/zoom/closeLaunchPage.js"],
+      "matches": ["https://*.zoom.us/j/*"],
+      "run_at": "document_start"
+    },
+    {
       "js": ["scripts/asana/openTaskInFullScrenn.js"],
       "matches": ["https://app.asana.com/0/*/*"],
       "run_at": "document_start"
