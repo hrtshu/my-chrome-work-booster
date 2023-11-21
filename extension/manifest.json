@@ -1,0 +1,7 @@
+{
+  "manifest_version": 3,
+  "name": "My Work Booster",
+  "version": "0.1",
+  "description": "",
+  "content_scripts": []
+}
