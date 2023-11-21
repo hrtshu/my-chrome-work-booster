@@ -5,6 +5,11 @@
   "description": "",
   "content_scripts": [
     {
+      "js": ["common/util.js", "scripts/slack/hideChannelList.js"],
+      "matches": ["https://app.slack.com/client/*"],
+      "run_at": "document_start"
+    },
+    {
       "js": ["common/util.js", "scripts/slack/hideUnreadDot.js"],
       "matches": ["https://app.slack.com/client/*"],
       "run_at": "document_idle"
