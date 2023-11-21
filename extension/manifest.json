@@ -5,6 +5,11 @@
   "description": "",
   "content_scripts": [
     {
+      "js": ["common/util.js", "scripts/slack/hideUnreadDot.js"],
+      "matches": ["https://app.slack.com/client/*"],
+      "run_at": "document_idle"
+    },
+    {
       "js": ["common/util.js", "scripts/slack/openLinkInBrowser.js"],
       "matches": ["https://moneyforward.slack.com/archives/*"],
       "run_at": "document_start"
