@@ -34,7 +34,6 @@
         if (wideStyle === null) addStyle();
       }
     },
-    200,
-    null
+    { interval: 200, maxRetry: null }
   );
 })();

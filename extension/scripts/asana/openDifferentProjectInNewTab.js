@@ -23,7 +23,6 @@
         previousProjectId = currentProjectId;
       }
     },
-    200,
-    null
+    { interval: 200, maxRetry: null }
   );
 })();

@@ -58,8 +58,7 @@
         setFocusViewMode();
         return false;
       },
-      200,
-      null
+      { interval: 200, maxRetry: null }
     );
   }
 
