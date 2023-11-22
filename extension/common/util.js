@@ -2,7 +2,7 @@ async function sleep(interval) {
   await new Promise((resolve) => setTimeout(resolve, interval));
 }
 
-async function retry(func, { interval = 100, maxRetry = 50, n = 0 } = {}) {
+async function retry(func, { interval = 200, maxRetry = 25, n = 0 } = {}) {
   if (maxRetry !== null && n >= maxRetry) return false;
 
   if (func(n)) return true;
