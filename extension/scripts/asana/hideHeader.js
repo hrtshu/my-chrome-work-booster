@@ -1,4 +1,6 @@
 (async function () {
+  let isOpen = false;
+
   function openSidebar(open = true) {
     const sidebar = document.querySelector("#asana_sidebar");
     const sidebarButton = document.querySelector(
@@ -14,7 +16,7 @@
 
     if (open ^ (sidebar.style.width !== "0px")) sidebarButton.click();
 
-    return true;
+    // return true;
   }
 
   function openTopbar(selector, open = true) {
@@ -23,10 +25,12 @@
     if (topbar === null || topbar === undefined) return false;
 
     topbar.style.display = open ? null : "none";
-    return true;
+    // return true;
   }
 
   function addHeaderSwitchButton() {
+    if (!document.body || !document.head) return false;
+
     const button = document.createElement("button");
     button.id = "headerSwitchButton";
     button.textContent = "";
@@ -54,28 +58,42 @@
 	  `;
 
     button.addEventListener("click", () => {
-      const topbar = document.querySelector(".AsanaBaseTopbar");
-
-      const open = topbar.style.display === "none";
-      openSidebar(open);
-      openTopbar(".GlobalTopbar", open);
-      openTopbar(".AsanaBaseTopbar", open);
+      isOpen = !isOpen;
+      // const topbar = document.querySelector(".AsanaBaseTopbar");
+      //
+      // const open = topbar.style.display === "none";
+      // openSidebar(open);
+      // openTopbar(".GlobalTopbar", open);
+      // openTopbar(".AsanaBaseTopbar", open);
     });
     document.body.appendChild(button);
     document.head.appendChild(style);
+
+    return true;
   }
 
-  retry(() => {
-    return openSidebar(false);
-  });
+  retry(
+    () => {
+      return openSidebar(isOpen);
+    },
+    { maxRetry: null }
+  );
+
+  retry(
+    () => {
+      return openTopbar(".AsanaBaseTopbar", isOpen);
+    },
+    { maxRetry: null }
+  );
+
+  retry(
+    () => {
+      return openTopbar(".GlobalTopbar", isOpen);
+    },
+    { maxRetry: null }
+  );
 
   retry(() => {
-    return openTopbar(".AsanaBaseTopbar", false);
+    return addHeaderSwitchButton();
   });
-
-  retry(() => {
-    return openTopbar(".GlobalTopbar", false);
-  });
-
-  addHeaderSwitchButton();
 })();
