@@ -23,6 +23,14 @@
       "run_at": "document_start"
     },
     {
+      "js": ["common/util.js", "scripts/github/openIssueLinkInNewTab.js"],
+      "matches": [
+        "https://github.com/*/*/issues*",
+        "https://github.com/*/*/pulls*"
+      ],
+      "run_at": "document_start"
+    },
+    {
       "js": ["common/util.js", "scripts/zoom/closeLaunchPage.js"],
       "matches": ["https://*.zoom.us/j/*"],
       "run_at": "document_start"
