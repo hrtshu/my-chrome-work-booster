@@ -11,6 +11,8 @@
       const currentUrl = location.href;
       const currentProjectId = getCurrentProjectId(currentUrl);
 
+      if (currentUrl === previousUrl) return;
+
       if (
         currentProjectId !== previousProjectId || // プロジェクトが変わった際
         currentUrl === previousUrl + "/f" // 全画面で開く際

@@ -45,7 +45,7 @@
     {
       "js": ["common/util.js", "scripts/asana/openDifferentProjectInNewTab.js"],
       "matches": ["https://app.asana.com/0/*"],
-      "run_at": "document_start"
+      "run_at": "document_idle"
     },
     {
       "js": ["common/util.js", "scripts/kibela/expandWidth.js"],
