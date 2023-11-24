@@ -24,10 +24,7 @@
     },
     {
       "js": ["common/util.js", "scripts/github/openIssueLinkInNewTab.js"],
-      "matches": [
-        "https://github.com/*/*/issues*",
-        "https://github.com/*/*/pulls*"
-      ],
+      "matches": ["https://github.com/*"],
       "run_at": "document_start"
     },
     {
