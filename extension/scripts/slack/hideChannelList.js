@@ -1,17 +1,43 @@
 (async function () {
   let focusViewMode = false;
 
-  function setFocusViewMode() {
+  function getElements() {
     const nav = document.querySelector(".p-ia4_top_nav");
-    const workspace = document.querySelector(
-      ".p-client_workspace--including_tab_rail"
-    );
+    const wrapper = document.querySelector(".p-client_workspace_wrapper");
+    const workspace = document.querySelector(".p-client_workspace");
     const layout = document.querySelector(".p-client_workspace__layout");
     const secondary = document.querySelector(".p-view_contents--secondary");
+    const resizers = document.querySelectorAll(".p-resizer");
+    const controlStrip = document.querySelector(".p-control_strip");
+    return {
+      nav,
+      wrapper,
+      workspace,
+      layout,
+      secondary,
+      resizers,
+      controlStrip,
+    };
+  }
+
+  function setFocusViewMode() {
+    const {
+      nav,
+      wrapper,
+      workspace,
+      layout,
+      secondary,
+      resizers,
+      controlStrip,
+    } = getElements();
 
     nav.style.display = "none";
 
-    workspace.style.gridTemplateAreas = '"p-client-workspace"';
+    wrapper.style.gridTemplateAreas = '"p-client-workspace"';
+    wrapper.style.gridTemplateColumns = "100%";
+    wrapper.style.gridTemplateRows = "100%";
+
+    workspace.style.gridTemplateAreas = '"p-client_workspace__layout"';
     workspace.style.gridTemplateColumns = "100%";
     workspace.style.gridTemplateRows = "100%";
 
@@ -25,19 +51,22 @@
       layout.style.gridTemplateColumns = "0 auto";
     }
 
-    document.querySelectorAll(".p-resizer").forEach((e) => {
+    controlStrip.style.display = "none";
+
+    resizers.forEach((e) => {
       e.style.display = "none";
     });
   }
 
   function unsetFocusViewMode() {
-    const nav = document.querySelector(".p-ia4_top_nav");
-    const workspace = document.querySelector(
-      ".p-client_workspace--including_tab_rail"
-    );
-    const layout = document.querySelector(".p-client_workspace__layout");
+    const { nav, wrapper, workspace, layout, resizers, controlStrip } =
+      getElements();
 
     nav.style.display = null;
+
+    wrapper.style.gridTemplateAreas = null;
+    wrapper.style.gridTemplateColumns = null;
+    wrapper.style.gridTemplateRows = null;
 
     workspace.style.gridTemplateAreas = null;
     workspace.style.gridTemplateColumns = null;
@@ -45,7 +74,9 @@
     layout.style.gridTemplateAreas = null;
     layout.style.gridTemplateColumns = null;
 
-    document.querySelectorAll(".p-resizer").forEach((e) => {
+    controlStrip.style.display = null;
+
+    resizers.forEach((e) => {
       e.style.display = null;
     });
   }
@@ -101,12 +132,9 @@
   }
 
   retry(() => {
-    const nav = document.querySelector(".p-ia4_top_nav");
-    const workspace = document.querySelector(
-      ".p-client_workspace--including_tab_rail"
-    );
-    const layout = document.querySelector(".p-client_workspace__layout");
-    if (!nav || !workspace || !layout) return false;
+    const { nav, wrapper, workspace, layout, controlStrip } = getElements();
+    if (!nav || !wrapper || !workspace || !layout || !controlStrip)
+      return false;
 
     focusViewMode = true;
     watchFocusViewMode();
