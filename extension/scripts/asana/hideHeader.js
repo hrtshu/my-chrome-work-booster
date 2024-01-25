@@ -81,7 +81,10 @@
 
   retry(
     () => {
-      return openTopbar(".AsanaBaseTopbar", isOpen);
+      return openTopbar(
+        ".TopbarPageHeaderStructureWithBreadcrumbs-rightChildrenWrapper",
+        isOpen
+      );
     },
     { maxRetry: null }
   );
