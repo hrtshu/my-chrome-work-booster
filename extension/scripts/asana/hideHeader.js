@@ -82,6 +82,35 @@
   retry(
     () => {
       return openTopbar(
+        ".TopbarPageHeaderStructureWithBreadcrumbs-topSection",
+        isOpen
+      );
+    },
+    { maxRetry: null }
+  );
+
+  retry(
+    () => {
+      const topbar = document.querySelector(".AsanaBaseTopbar");
+      const headerStructure = document.querySelector(
+        ".TopbarPageHeaderStructureWithBreadcrumbs--withNavMenu"
+      );
+
+      if (topbar === null || topbar === undefined) return false;
+      if (headerStructure === null || headerStructure === undefined)
+        return false;
+
+      topbar.style.minHeight = isOpen ? null : "0px";
+      headerStructure.style.minHeight = isOpen ? null : "0px";
+
+      return false;
+    },
+    { maxRetry: null }
+  );
+
+  retry(
+    () => {
+      return openTopbar(
         ".TopbarPageHeaderStructureWithBreadcrumbs-rightChildrenWrapper",
         isOpen
       );
