@@ -38,11 +38,11 @@
     const style = document.createElement("style");
     style.textContent = `
 	    #headerSwitchButton {
-	      width: 13px;
-	      height: 13px;
+	      width: 23px;
+	      height: 23px;
 	      position: fixed;
-	      top: 5px;
-	      right: 5px;
+	      top: 7px;
+	      right: 7px;
 	      background-color: lightgray;
 	      border: 1px solid darkgray;
 	      padding: 1px;
