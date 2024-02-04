@@ -93,17 +93,20 @@
     );
   }
 
+  function toggleFocusViewMode() {
+    focusViewMode = !focusViewMode;
+    if (focusViewMode) {
+      watchFocusViewMode();
+    } else {
+      unsetFocusViewMode();
+    }
+  }
+
   function addFocusViewButton() {
     const button = document.createElement("button");
     button.id = "headerSwitchButton";
     button.addEventListener("click", () => {
-      focusViewMode = !focusViewMode;
-
-      if (focusViewMode) {
-        watchFocusViewMode();
-      } else {
-        unsetFocusViewMode();
-      }
+      toggleFocusViewMode();
     });
     document.body.appendChild(button);
 
@@ -135,6 +138,16 @@
     const { nav, wrapper, workspace, layout, controlStrip } = getElements();
     if (!nav || !wrapper || !workspace || !layout || !controlStrip)
       return false;
+
+    document.addEventListener("keydown", function (event) {
+      if (
+        event.altKey &&
+        event.metaKey &&
+        (event.key === "c" || event.key === "ç")
+      ) {
+        toggleFocusViewMode();
+      }
+    });
 
     const disableFocusViewMode =
       new URLSearchParams(location.search).get("disableFocusViewMode") === "1";
