@@ -136,7 +136,10 @@
     if (!nav || !wrapper || !workspace || !layout || !controlStrip)
       return false;
 
-    focusViewMode = true;
+    const disableFocusViewMode =
+      new URLSearchParams(location.search).get("disableFocusViewMode") === "1";
+
+    focusViewMode = !disableFocusViewMode;
     watchFocusViewMode();
     addFocusViewButton();
     return true;
