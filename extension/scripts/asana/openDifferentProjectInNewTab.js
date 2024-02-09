@@ -1,4 +1,6 @@
 (async function () {
+  if (!document.cookie.includes("enable-cwb=1")) return;
+
   function getCurrentProjectId(url) {
     return new URL(url).pathname.split("/")[2];
   }
