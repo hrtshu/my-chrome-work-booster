@@ -140,11 +140,8 @@
       return false;
 
     document.addEventListener("keydown", function (event) {
-      if (
-        event.altKey &&
-        event.metaKey &&
-        (event.key === "c" || event.key === "ç")
-      ) {
+      console.log(event.key, event.shiftKey, event.ctrlKey, event);
+      if (event.shiftKey && event.ctrlKey && event.key === "C") {
         toggleFocusViewMode();
       }
     });
