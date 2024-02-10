@@ -147,6 +147,7 @@
     });
 
     const disableFocusViewMode =
+      document.cookie.includes("disable-fvm=1") ||
       new URLSearchParams(location.search).get("disableFocusViewMode") === "1";
 
     focusViewMode = !disableFocusViewMode;
