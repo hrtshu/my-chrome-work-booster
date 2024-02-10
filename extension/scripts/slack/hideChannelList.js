@@ -1,5 +1,6 @@
 (async function () {
   let focusViewMode = false;
+  let doubleRowMode = false;
 
   function getElements() {
     const nav = document.querySelector(".p-ia4_top_nav");
@@ -44,11 +45,13 @@
     if (secondary) {
       layout.style.gridTemplateAreas =
         '"p-view_contents--sidebar p-view_contents--primary p-view_contents--secondary"';
-      layout.style.gridTemplateColumns = "0 0 auto";
+      layout.style.gridTemplateColumns = doubleRowMode
+        ? "0 40% 60%"
+        : "0 0 auto";
     } else {
       layout.style.gridTemplateAreas =
         '"p-view_contents--sidebar p-view_contents--primary"';
-      layout.style.gridTemplateColumns = "0 auto";
+      layout.style.gridTemplateColumns = doubleRowMode ? "40% 60%" : "0 auto";
     }
 
     controlStrip.style.display = "none";
@@ -149,6 +152,9 @@
     const disableFocusViewMode =
       document.cookie.includes("disable-fvm=1") ||
       new URLSearchParams(location.search).get("disableFocusViewMode") === "1";
+
+    doubleRowMode =
+      new URLSearchParams(location.search).get("doubleRowMode") === "1";
 
     focusViewMode = !disableFocusViewMode;
     watchFocusViewMode();
