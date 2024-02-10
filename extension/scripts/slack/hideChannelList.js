@@ -142,12 +142,8 @@
     if (!nav || !wrapper || !workspace || !layout || !controlStrip)
       return false;
 
-    document.addEventListener("keydown", function (event) {
-      console.log(event.key, event.shiftKey, event.ctrlKey, event);
-      if (event.shiftKey && event.ctrlKey && event.key === "C") {
-        toggleFocusViewMode();
-      }
-    });
+    const forceFocusViewMode =
+      new URLSearchParams(location.search).get("forceFocusViewMode") === "1";
 
     const disableFocusViewMode =
       document.cookie.includes("disable-fvm=1") ||
@@ -156,9 +152,19 @@
     doubleRowMode =
       new URLSearchParams(location.search).get("doubleRowMode") === "1";
 
-    focusViewMode = !disableFocusViewMode;
+    focusViewMode = forceFocusViewMode || !disableFocusViewMode;
     watchFocusViewMode();
-    addFocusViewButton();
+
+    if ((focusViewMode && !forceFocusViewMode) || !focusViewMode) {
+      document.addEventListener("keydown", function (event) {
+        console.log(event.key, event.shiftKey, event.ctrlKey, event);
+        if (event.shiftKey && event.ctrlKey && event.key === "C") {
+          toggleFocusViewMode();
+        }
+      });
+      addFocusViewButton();
+    }
+
     return true;
   });
 })();
