@@ -10,6 +10,9 @@
     const secondary = document.querySelector(".p-view_contents--secondary");
     const resizers = document.querySelectorAll(".p-resizer");
     const controlStrip = document.querySelector(".p-control_strip");
+    const sideBarButtonsToHide = document.querySelectorAll(
+      '.p-tab_rail__button[aria-label="Activity"], .p-tab_rail__button[aria-label="DMs"], .p-tab_rail__button[aria-label="More…"]'
+    );
     return {
       nav,
       wrapper,
@@ -18,26 +21,19 @@
       secondary,
       resizers,
       controlStrip,
+      sideBarButtonsToHide,
     };
   }
 
   function setFocusViewMode() {
     const {
-      nav,
-      wrapper,
       workspace,
       layout,
       secondary,
       resizers,
       controlStrip,
+      sideBarButtonsToHide,
     } = getElements();
-
-    nav.style.display = "none";
-
-    wrapper.style.gridTemplateAreas = '"p-client-workspace"';
-    wrapper.style.gridTemplateColumns = "100%";
-    wrapper.style.gridTemplateRows = "100%";
-
     workspace.style.gridTemplateAreas = '"p-client_workspace__layout"';
     workspace.style.gridTemplateColumns = "100%";
     workspace.style.gridTemplateRows = "100%";
@@ -45,13 +41,19 @@
     if (secondary) {
       layout.style.gridTemplateAreas =
         '"p-view_contents--sidebar p-view_contents--primary p-view_contents--secondary"';
-      layout.style.gridTemplateColumns = doubleRowMode
-        ? "0 40% 60%"
-        : "0 0 auto";
+      layout.style.gridTemplateColumns =
+        doubleRowMode ||
+        document.querySelector('.p-view_contents--sidebar[aria-label="Later"]')
+          ? "0 40% 60%"
+          : "0 0 auto";
     } else {
       layout.style.gridTemplateAreas =
         '"p-view_contents--sidebar p-view_contents--primary"';
-      layout.style.gridTemplateColumns = doubleRowMode ? "40% 60%" : "0 auto";
+      layout.style.gridTemplateColumns =
+        doubleRowMode ||
+        document.querySelector('.p-view_contents--sidebar[aria-label="Later"]')
+          ? "40% 60%"
+          : "0 auto";
     }
 
     controlStrip.style.display = "none";
@@ -59,18 +61,15 @@
     resizers.forEach((e) => {
       e.style.display = "none";
     });
+
+    sideBarButtonsToHide.forEach((e) => {
+      e.style.display = "none";
+    });
   }
 
   function unsetFocusViewMode() {
-    const { nav, wrapper, workspace, layout, resizers, controlStrip } =
+    const { workspace, layout, resizers, controlStrip, sideBarButtonsToHide } =
       getElements();
-
-    nav.style.display = null;
-
-    wrapper.style.gridTemplateAreas = null;
-    wrapper.style.gridTemplateColumns = null;
-    wrapper.style.gridTemplateRows = null;
-
     workspace.style.gridTemplateAreas = null;
     workspace.style.gridTemplateColumns = null;
 
@@ -80,6 +79,10 @@
     controlStrip.style.display = null;
 
     resizers.forEach((e) => {
+      e.style.display = null;
+    });
+
+    sideBarButtonsToHide.forEach((e) => {
       e.style.display = null;
     });
   }
