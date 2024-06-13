@@ -1,6 +1,7 @@
 (async function () {
   let focusViewMode = false;
   let doubleRowMode = false;
+  let completeFocusMode = false;
 
   function getElements() {
     const nav = document.querySelector(".p-ia4_top_nav");
@@ -27,6 +28,8 @@
 
   function setFocusViewMode() {
     const {
+      nav,
+      wrapper,
       workspace,
       layout,
       secondary,
@@ -34,6 +37,14 @@
       controlStrip,
       sideBarButtonsToHide,
     } = getElements();
+    if (completeFocusMode) {
+      nav.style.display = "none";
+
+      wrapper.style.gridTemplateAreas = '"p-client-workspace"';
+      wrapper.style.gridTemplateColumns = "100%";
+      wrapper.style.gridTemplateRows = "100%";
+    }
+
     workspace.style.gridTemplateAreas = '"p-client_workspace__layout"';
     workspace.style.gridTemplateColumns = "100%";
     workspace.style.gridTemplateRows = "100%";
@@ -68,8 +79,21 @@
   }
 
   function unsetFocusViewMode() {
-    const { workspace, layout, resizers, controlStrip, sideBarButtonsToHide } =
-      getElements();
+    const {
+      nav,
+      wrapper,
+      workspace,
+      layout,
+      resizers,
+      controlStrip,
+      sideBarButtonsToHide,
+    } = getElements();
+    nav.style.display = null;
+
+    wrapper.style.gridTemplateAreas = null;
+    wrapper.style.gridTemplateColumns = null;
+    wrapper.style.gridTemplateRows = null;
+
     workspace.style.gridTemplateAreas = null;
     workspace.style.gridTemplateColumns = null;
 
@@ -154,6 +178,10 @@
 
     doubleRowMode =
       new URLSearchParams(location.search).get("doubleRowMode") === "1";
+
+    // あくまでfocusViewModeが有効な場合のみ適用されるオプション
+    completeFocusMode =
+      new URLSearchParams(location.search).get("completeFocusMode") === "1";
 
     focusViewMode = forceFocusViewMode || !disableFocusViewMode;
     watchFocusViewMode();
