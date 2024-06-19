@@ -24,7 +24,10 @@
     },
     {
       "js": ["common/util.js", "scripts/slack/openLinkInBrowser.js"],
-      "matches": ["https://moneyforward.slack.com/archives/*"],
+      "matches": [
+        "https://moneyforward.slack.com/archives/*",
+        "https://moneyforward.slack.com/lists/*"
+      ],
       "run_at": "document_start"
     },
     {
