@@ -61,6 +61,11 @@
       "run_at": "document_start"
     },
     {
+      "js": ["common/util.js", "scripts/kibela/openNoteInNewWindow.js"],
+      "matches": ["https://*.kibe.la/folders/*"],
+      "run_at": "document_start"
+    },
+    {
       "js": ["common/util.js", "scripts/kibela/clickLoginButton.js"],
       "matches": ["https://*.kibe.la/signin?*"],
       "run_at": "document_start"
