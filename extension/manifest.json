@@ -36,6 +36,11 @@
       "run_at": "document_start"
     },
     {
+      "js": ["common/util.js", "scripts/github/clickSsoButton.js"],
+      "matches": ["https://github.com/orgs/*/sso"],
+      "run_at": "document_start"
+    },
+    {
       "js": ["common/util.js", "scripts/zoom/closeLaunchPage.js"],
       "matches": ["https://*.zoom.us/j/*"],
       "run_at": "document_start"
