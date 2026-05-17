@@ -37,7 +37,7 @@
     },
     {
       "js": ["common/util.js", "scripts/github/clickSsoButton.js"],
-      "matches": ["https://github.com/orgs/*/sso"],
+      "matches": ["https://github.com/orgs/*"],
       "run_at": "document_start"
     },
     {
